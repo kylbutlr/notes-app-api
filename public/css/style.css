@@ -1,0 +1,183 @@
+html, body {
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+html {
+  background-color: #111111;
+}
+body {
+  color: #111111;
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+}
+h1, h2, h3 {
+  font-family: inherit;
+  font-weight: normal;
+  margin: 0;
+  padding: 1vh 1vw;
+}
+.background {
+  background-color: #111111;
+  height: auto;
+  width: auto;
+  padding: 5vh 5vw;
+}
+.container {
+  border-radius: 20px;
+  box-shadow: 0 5px 15px -1px black;
+  background-color: #ececec;
+  height: 85vh;
+  width: 85vw;
+  padding: 2.5vh 2.5vw;
+  display: grid;
+  grid-template-columns: 1fr 2.5fr;
+  grid-template-rows: auto;
+}
+.input {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: end;
+}
+.title,
+.search-input {
+  height: 6vh;
+}
+.text {
+  height: 12vh;
+}
+button,
+input,
+textarea {
+  font-family: inherit;
+  outline: none;
+  color: inherit;
+}
+input {
+  border-radius: 10px;
+  box-shadow: inset 0 3px 10px -3px black;
+}
+input,
+.submit-tags,
+.submit-note,
+.submit-search,
+.clear-button {
+  box-sizing: border-box;
+  text-align: center;
+  width: 100%;
+  height: 4vh;
+  margin: 0;
+  padding: 0;
+}
+.add-tags,
+.clear-button,
+.list-display,
+.temp-tag-display {
+  margin: 5vh 0 0 0;
+}
+.temp-tag-list {
+  height: 26.5vh;
+  overflow: auto;
+  border-radius: 20px;
+  box-shadow: inset 0 5px 15px -1px black;
+  background-color: #11111111;
+}
+.list-display {
+  height: 70vh;
+  overflow: auto;
+  border-radius: 20px;
+  box-shadow: inset 0 5px 15px -1px black;
+  background-color: #11111111;
+}
+.display {
+  margin: 0 0 0 2.5vw;
+}
+ul{
+  padding: 0;
+}
+li {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0 auto;
+  padding: 1vh 1vw;
+}
+.note-div {
+  width: 100%;
+}
+button:hover {
+  cursor: pointer;
+}
+li:hover>.note-edit,
+li:hover>.note-delete,
+li:hover>.tag-edit,
+li:hover>.tag-delete {
+  opacity: 1;
+}
+.button {
+  background-image: linear-gradient(to bottom, #dcdcdc, #bebebe);
+  border-radius: 10px;
+  box-shadow: 0px 2px 4px -2px black;
+  text-align: center;
+  transition: transform scale 0.1s;
+}
+.button:hover {
+  background-image: linear-gradient(to bottom, #cccccc, #aeaeae);
+}
+.mini-button {
+  border-radius: 10px;
+  box-shadow: 0px 2px 4px -2px black;
+  text-align: center;
+  transition: transform scale 0.1s;
+}
+button:active,
+.mini-button:active {
+  box-shadow: inset 0px 3px 6px -3px black;
+  transform: scale(0.95);
+}
+.note-edit,
+.tag-edit {
+  background-image: url("images/edit-icon.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto 75%;
+  border-radius: 10px 0 0 10px;
+  content: "";
+  font-size: 12px;
+  height: 20px;
+  margin: 0 0 0 10px;
+  opacity: 0;
+  transition: opacity 0.5s;
+  width: 25px;
+}
+.note-delete,
+.tag-delete {
+  background-image: url("images/delete-icon.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto 90%;
+  border-radius: 0 10px 10px 0;
+  content: "";
+  font-size: 12px;
+  height: 20px;
+  opacity: 0;
+  transition: opacity 0.5s;
+  width: 25px;
+}
+.new-post {
+  opacity: 0;
+  transition: opacity 1s;
+}
+.post-visible {
+  opacity: 1;
+}
+.post-delete {
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+::-webkit-scrollbar {
+  display: hidden;
+}
