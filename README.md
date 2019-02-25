@@ -1,3 +1,6 @@
-# Notes App API
+# Notes App (API)
 ### Back End for note taking application 
-#### with user accounts and searchable tags (React, PostgreSQL, bcrypt, jwt)
+#### User accounts, searchable tags, authorization, and encryption
+#### (with PostgreSQL, jwt, and bcrypt)
+
+##### [v1 w/ more git history](https://github.com/kylbutlr/notes-app)
