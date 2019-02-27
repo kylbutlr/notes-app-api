@@ -6,15 +6,17 @@
 
 ## Install
 
-```
+```bash
 npm install
 ```
 
 ## Usage
 
-```
+```bash
 npm start
 ```
+
+(Runs on port `3000`)
 
 ## Contributing
 
