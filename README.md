@@ -4,15 +4,7 @@
 #### [Can be used with the Notes App React repo](https://github.com/kylbutlr/notes-app-react)
 ##### [Previous repository with prior git commit history](https://github.com/kylbutlr/notes-app)
 
-# Title
-
-> This is an example file with default selections.
-
 ## Install
-
-```sh
-npm install
-```
 
 ```
 npm install
@@ -21,12 +13,15 @@ npm install
 ## Usage
 
 ```
+npm start
 ```
 
 ## Contributing
+
+[@KylButlr](https://github.com/kylbutlr)
 
 PRs accepted.
 
 ## License
 
-MIT © Richard McRichface
+MIT
