@@ -10,15 +10,13 @@
 
 ## Install
 
-```
-`npm install`
+```sh
+npm install
 ```
 
 ```
 npm install
 ```
-
-`npm install`
 
 ## Usage
 
