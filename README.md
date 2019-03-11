@@ -22,8 +22,16 @@ Runs on port `3000`
 ## API
 
 All Requests Require a Config Object of Headers for:
-* Authorization: JWT
-* User_ID: Logged in User
+* Authorization: JSON Web Token
+* User_ID: Logged in User ID
+
+Example:
+```js
+headers: {
+  authorization: [THE JWT],
+  user_id: [THE USER ID]
+}
+```
 
 Request        | Response Description
 --- | ---
