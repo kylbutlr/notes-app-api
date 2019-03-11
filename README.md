@@ -19,6 +19,17 @@ npm start
 
 Runs on port `3000`
 
+## API
+
+All Requests Require a Config Object of Headers for:
+* Authorization: JWT
+* User_ID: Logged in User
+
+Request        | Response Description
+--- | --- | ---
+GET /notes     | Returns all notes created by User_ID
+GET /notes/:id | Returns one note found by note's ID
+
 ## Contributing
 
 [@kylbutlr](https://github.com/kylbutlr)
