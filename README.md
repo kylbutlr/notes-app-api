@@ -26,7 +26,7 @@ All Requests Require a Config Object of Headers for:
 * User_ID: Logged in User
 
 Request        | Response Description
---- | --- | ---
+--- | ---
 GET /notes     | Returns all notes created by User_ID
 GET /notes/:id | Returns one note found by note's ID
 
