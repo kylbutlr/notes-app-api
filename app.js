@@ -12,26 +12,12 @@ module.exports = client => {
   const sessionModel = SessionModel(db);
 
   // Notes
-  const getAllNotes = (req, res, next) => {
-    db.selectAllNotes((err, data) => {
-      if (err) return next(err);
-      res.status(200).send(data);
-    });
-  };
   const getOneNote = (req, res, next) => {
     const id = Number(req.params.id);
     db.selectOneNote(id, (err, data) => {
       if (err) return next(err);
       if (!data[0]) return next();
       res.status(200).send(data[0]);
-    });
-  };
-  const getAllNotesByUserID = (req, res, next) => {
-    const user_id = req.params.user_id;
-    db.selectAllNotesByUserID(user_id, (err, data) => {
-      if (err) return next(err);
-      if (!data) return next();
-      res.status(200).send(data);
     });
   };
   const postNote = (req, res, next) => {
@@ -78,12 +64,6 @@ module.exports = client => {
   };
 
   // Tags
-  const getAllTags = (req, res, next) => {
-    db.selectAllTags((err, data) => {
-      if (err) return next(err);
-      res.status(200).send(data);
-    });
-  };
   const getOneTag = (req, res, next) => {
     let id = req.params.id;
     if (id.indexOf(',') >= 0) {
@@ -93,14 +73,6 @@ module.exports = client => {
       if (err) return next(err);
       if (!data[0]) return next();
       res.status(200).send(data[0]);
-    });
-  };
-  const getAllTagsByUserID = (req, res, next) => {
-    const user_id = req.user.user_id;
-    db.selectAllTagsByUserID(user_id, (err, data) => {
-      if (err) return next(err);
-      if (!data) return next();
-      res.status(200).send(data);
     });
   };
   const postTag = (req, res, next) => {
@@ -157,18 +129,20 @@ module.exports = client => {
   };
 
   // Users
-  const getAllUsers = (req, res, next) => {
-    db.selectAllUsers((err, data) => {
+  const getAllNotesByUserID = (req, res, next) => {
+    const user_id = req.params.user_id;
+    db.selectAllNotesByUserID(user_id, (err, data) => {
       if (err) return next(err);
+      if (!data) return next();
       res.status(200).send(data);
     });
   };
-  const getOneUserByID = (req, res, next) => {
-    const id = Number(req.params.id);
-    db.selectOneUserByID(id, (err, data) => {
+  const getAllTagsByUserID = (req, res, next) => {
+    const user_id = req.user.user_id;
+    db.selectAllTagsByUserID(user_id, (err, data) => {
       if (err) return next(err);
-      if (!data[0]) return next();
-      res.status(200).send(data[0]);
+      if (!data) return next();
+      res.status(200).send(data);
     });
   };
   const getOneUserByUsername = (req, res, next) => {
@@ -197,12 +171,6 @@ module.exports = client => {
         if (!data[0]) return next();
         res.status(204).send(data[0]);
       });
-    });
-  };
-  const deleteAllUsers = (req, res, next) => {
-    db.deleteAllUsers((err, data) => {
-      if (err) return next(err);
-      res.status(204).send(data);
     });
   };
   const deleteOneUser = (req, res, next) => {
@@ -260,26 +228,21 @@ module.exports = client => {
   };
 
   app.use(cors());
-  app.get('/notes', [authMiddleware(db), getAllNotes]);
   app.get('/notes/:id', [authMiddleware(db), getOneNote]);
   app.post('/notes', [authMiddleware(db), postNote]);
   app.put('/notes/:id', [authMiddleware(db), putNote]);
   app.delete('/notes/:id', [authMiddleware(db), deleteOneNote]);
   app.delete('/notes', [authMiddleware(db), deleteAllNotes]);
-  app.get('/tags', [authMiddleware(db), getAllTags]);
   app.get('/tags/:id', [authMiddleware(db), getOneTag]);
   app.post('/tags', [authMiddleware(db), postTag]);
   app.put('/tags/:id', [authMiddleware(db), putTag]);
   app.delete('/tags/:id', [authMiddleware(db), deleteOneTag]);
   app.delete('/tags', [authMiddleware(db), deleteAllTags]);
-  app.get('/user/:user_id/notes', [getAllNotesByUserID]);
+  app.get('/user/:user_id/notes', [authMiddleware(db), getAllNotesByUserID]);
   app.get('/user/:user_id/tags', [authMiddleware(db), getAllTagsByUserID]);
-  app.get('/users', [authMiddleware(db), getAllUsers]);
-  app.get('/users/:id', [authMiddleware(db), getOneUserByID]);
-  app.get('/users/user/:username', [authMiddleware(db), getOneUserByUsername]);
+  app.get('/users/:username', [authMiddleware(db), getOneUserByUsername]);
   app.put('/users/:id', [authMiddleware(db), putOneUser]);
   app.delete('/users/:id', [authMiddleware(db), deleteOneUser]);
-  app.delete('/users', [authMiddleware(db), deleteAllUsers]);
   app.post('/register', registerUser);
   app.post('/login', loginUser);
   app.use((req, res) => res.status(404).send('404: Not Found'));
