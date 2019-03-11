@@ -32,7 +32,8 @@ headers: {
 ```
 *Not needed for login/register
 
-For Users:
+#### For Users:
+
 HTTP   | Request              | Response
 --- | --- | ---
 POST   | /login               | Creates a new JWT session
@@ -41,7 +42,8 @@ GET    | /users/:username     | Returns one user selected by the username
 PUT    | /users/:id           | Edits a user selected by the user's ID
 DELETE | /users/:id           | Deletes a user selected by the user's ID
 
-For Notes:
+#### For Notes:
+
 HTTP   | Request              | Response
 --- | --- | ---
 GET    | /user/:user_id/notes | Returns all notes created by user's ID
@@ -51,7 +53,8 @@ PUT    | /notes/:id           | Edits a note selected by the note's ID
 DELETE | /notes               | Deletes all notes created by user's ID
 DELETE | /notes/:id           | Deletes one note selected by the note's ID
 
-For Tags:
+#### Tags:
+
 HTTP   | Request              | Response
 --- | --- | ---
 GET    | /user/:user_id/tags | Returns all tags created by user's ID
