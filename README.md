@@ -32,7 +32,7 @@ headers: {
 ```
 *Not needed for login/register
 
-#### For Users:
+#### Users:
 
 HTTP   | Request              | Response
 --- | --- | ---
@@ -42,7 +42,7 @@ GET    | /users/:username     | Returns one user selected by the username
 PUT    | /users/:id           | Edits a user selected by the user's ID
 DELETE | /users/:id           | Deletes a user selected by the user's ID
 
-#### For Notes:
+#### Notes:
 
 HTTP   | Request              | Response
 --- | --- | ---
