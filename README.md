@@ -36,9 +36,9 @@ headers: {
 
 HTTP   | Request              | Response
 --- | --- | ---
+GET    | /users/:username     | Returns one user selected by the username
 POST   | /login               | Creates a new JWT session
 POST   | /register            | Registers a new user
-GET    | /users/:username     | Returns one user selected by the username
 PUT    | /users/:id           | Edits a user selected by the user's ID
 DELETE | /users/:id           | Deletes a user selected by the user's ID
 
