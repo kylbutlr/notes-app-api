@@ -1,6 +1,6 @@
 # Notes App (API)
 
-#### Note taking app public RESTful API [Can be used with Notes App (React)](https://github.com/kylbutlr/notes-app-react)
+#### Note taking app public RESTful API, [can be used with Notes App (React)](https://github.com/kylbutlr/notes-app-react)
 
 Using: PostgreSQL, Express, Jest, JWT, and Bcrypt
 
