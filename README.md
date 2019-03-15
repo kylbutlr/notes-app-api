@@ -33,7 +33,7 @@ headers: {
   user_id: [THE USER ID]
 }
 ```
-(*Not needed for login/register)
+*Not needed for login/register
 
 #### Users:
 
