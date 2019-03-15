@@ -24,7 +24,7 @@ Server runs on port `3000`
 npm start
 ```
 
-All* Requests require a Config Object of Headers for:
+All requests* require a Config Object of Headers for:
 * Authorization: JSON Web Token
 * User_ID: Logged in User ID
 ```js
