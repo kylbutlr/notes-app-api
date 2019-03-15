@@ -8,7 +8,7 @@ Featuring: REST CRUD, routing, tests, user accounts, authorization, and encrypti
 
 All entries and modifications will be saved and only displayed for the corresponding logged in user.
 
-([Previous depreciated model repository with more commit history](https://github.com/kylbutlr/notes-app))
+[Previous depreciated model repository](https://github.com/kylbutlr/notes-app)
 
 ## Install
 
