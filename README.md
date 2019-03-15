@@ -1,14 +1,14 @@
 # Notes App (API)
-### Note taking application RESTful API
-### [Can be used with Notes App (React)](https://github.com/kylbutlr/notes-app-react)
-#### Features: REST CRUD, routing, tests, user accounts, authorization, and encryption
-#### Using: PostgreSQL, Express, Jest, JWT, and Bcrypt
 
-This is a custom public REST API to run the back-end of a Notes application.
+#### Note taking app public RESTful API [Can be used with Notes App (React)](https://github.com/kylbutlr/notes-app-react)
 
-Features user accounts, so all entries and modifications will be saved and only displayed for the corresponding logged in user.
+Using: PostgreSQL, Express, Jest, JWT, and Bcrypt
 
-([Previous model repository with more commit history](https://github.com/kylbutlr/notes-app))
+Featuring: REST CRUD, routing, tests, user accounts, authorization, and encryption
+
+All entries and modifications will be saved and only displayed for the corresponding logged in user.
+
+([Previous depreciated model repository with more commit history](https://github.com/kylbutlr/notes-app))
 
 ## Install
 
