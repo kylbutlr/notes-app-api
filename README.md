@@ -24,13 +24,10 @@ Server runs on port `3000`
 npm start
 ```
 
-All requests* require a Config Object of Headers for:
-* Authorization: JSON Web Token
-* User_ID: Logged in User ID
+All requests* require a Config Object of Headers for Authorization containing the JSON Web Token:
 ```js
 headers: {
-  authorization: [THE JWT],
-  user_id: [THE USER ID]
+  authorization: JWT
 }
 ```
 *Not needed for login/register
