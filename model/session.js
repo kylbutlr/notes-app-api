@@ -17,12 +17,12 @@ module.exports = db => {
     );
   };
 
-  const verifySession = (session, user_id, cb) => {
+  const verifySession = (session, cb) => {
     jwt.verify(session, 'secretPass', (err, decoded) => {
       if (err) {
         return cb(err);
       }
-      if (decoded.user_id === Number(user_id)) {
+      if (decoded.user_id !== false) {
         cb(null, decoded);
       }
     });

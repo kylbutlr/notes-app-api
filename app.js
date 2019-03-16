@@ -12,6 +12,14 @@ module.exports = client => {
   const sessionModel = SessionModel(db);
 
   // Notes
+  const getAllNotesByUserID = (req, res, next) => {
+    const user_id = req.params.user_id;
+    db.selectAllNotesByUserID(user_id, (err, data) => {
+      if (err) return next(err);
+      if (!data) return next();
+      res.status(200).send(data);
+    });
+  };
   const getOneNote = (req, res, next) => {
     const id = Number(req.params.id);
     db.selectOneNote(id, (err, data) => {
@@ -64,6 +72,14 @@ module.exports = client => {
   };
 
   // Tags
+  const getAllTagsByUserID = (req, res, next) => {
+    const user_id = req.user.user_id;
+    db.selectAllTagsByUserID(user_id, (err, data) => {
+      if (err) return next(err);
+      if (!data) return next();
+      res.status(200).send(data);
+    });
+  };
   const getOneTag = (req, res, next) => {
     let id = req.params.id;
     if (id.indexOf(',') >= 0) {
@@ -129,22 +145,6 @@ module.exports = client => {
   };
 
   // Users
-  const getAllNotesByUserID = (req, res, next) => {
-    const user_id = req.params.user_id;
-    db.selectAllNotesByUserID(user_id, (err, data) => {
-      if (err) return next(err);
-      if (!data) return next();
-      res.status(200).send(data);
-    });
-  };
-  const getAllTagsByUserID = (req, res, next) => {
-    const user_id = req.user.user_id;
-    db.selectAllTagsByUserID(user_id, (err, data) => {
-      if (err) return next(err);
-      if (!data) return next();
-      res.status(200).send(data);
-    });
-  };
   const getOneUserByUsername = (req, res, next) => {
     const username = req.params.username;
     db.selectOneUserByUsername(username, (err, data) => {
