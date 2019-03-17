@@ -8,7 +8,6 @@ module.exports = db => {
       if (err) {
         return res.status(401).send({ error: 'Unauthorized' });
       }
-      console.log(session); 
       req.user = session;
       return next();
     });
