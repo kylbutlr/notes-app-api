@@ -2,9 +2,13 @@
 
 #### Note taking app public RESTful API, [can be used with Notes App (React)](https://github.com/kylbutlr/notes-app-react)
 
-Using: PostgreSQL, Express, Jest, JWT, and Bcrypt
+Uses: PostgreSQL, Express, Jest, JWT, and Bcrypt
 
-Featuring: REST CRUD, routing, tests, user accounts, authorization, and encryption
+Features: REST CRUD, routing, tests, user accounts, authorization, and encryption
+
+[This API is hosted publicly on Heroku](https://kylbutlr-notes-api.herokuapp.com) (requests require auth)
+
+### [Click Here for a Live Preview of the React app using this API](https://kylbutlr-notes-react.herokuapp.com/) (No e-mail required to Register)
 
 All entries and modifications will be saved and only displayed for the corresponding logged in user.
 
