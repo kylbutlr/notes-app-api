@@ -70,11 +70,11 @@ headers: {
 
 ## Contributing
 
-Kyle Butler [@kylbutlr](https://github.com/kylbutlr)
+[@kylbutlr](https://github.com/kylbutlr)
 
 #### Special Thanks: 
 
-Nouman Saleem [@NoumanSaleem](https://github.com/NoumanSaleem)
+[@NoumanSaleem](https://github.com/NoumanSaleem)
 
 ## License
 
