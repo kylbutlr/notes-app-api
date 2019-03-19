@@ -1,14 +1,12 @@
 # Notes App (API)
 
-#### Note taking application's RESTful API
+Note-taking application RESTful API
 
 Created to be used with my [Notes App (React)](https://github.com/kylbutlr/notes-app-react) app
 
 Features: REST CRUD, routing, tests, user accounts, authorization, and encryption
 
 Uses: PostgreSQL, Express, Jest, JWT, and Bcrypt
-
-## Preview
 
 ### [Click here for a live preview](https://kylbutlr-notes-react.herokuapp.com/) of my React app that uses this API. 
 
