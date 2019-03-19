@@ -1,18 +1,20 @@
 # Notes App (API)
 
-#### Note taking app public RESTful API, [can be used with Notes App (React)](https://github.com/kylbutlr/notes-app-react)
+#### Note taking application's RESTful API
 
-Uses: PostgreSQL, Express, Jest, JWT, and Bcrypt
+Created to be used with my [Notes App (React)](https://github.com/kylbutlr/notes-app-react) app
 
 Features: REST CRUD, routing, tests, user accounts, authorization, and encryption
 
-[This API is hosted publicly on Heroku](https://kylbutlr-notes-api.herokuapp.com) (requests require auth)
+Uses: PostgreSQL, Express, Jest, JWT, and Bcrypt
 
-### [Click Here for a Live Preview of the React app using this API](https://kylbutlr-notes-react.herokuapp.com/) (No e-mail required to Register)
+## Preview
 
-All entries and modifications will be saved and only displayed for the corresponding logged in user.
+### [Click here for a live preview](https://kylbutlr-notes-react.herokuapp.com/) of my React app that uses this API. 
 
-[Previous depreciated model repository](https://github.com/kylbutlr/notes-app)
+Or [go to the API directly](https://kylbutlr-notes-api.herokuapp.com) in your browser. (Requests require JWT authentication created by login; See the Usage section below for more details)
+
+No e-mail required to register a new user account. Feel free to "sign up" and test things out!
 
 ## Install
 
@@ -29,6 +31,7 @@ npm start
 ```
 
 All requests (besides login/register) require a Config Object of Headers for Authorization containing the JSON Web Token:
+
 ```js
 headers: {
   authorization: JWT
@@ -37,41 +40,45 @@ headers: {
 
 #### Users:
 
-HTTP   | Request              | Response
---- | --- | ---
-GET    | /users/:username     | Returns one user selected by the username
-POST   | /login               | Creates a new JWT session
-POST   | /register            | Registers a new user
-PUT    | /users/:id           | Edits a user selected by the user's ID
-DELETE | /users/:id           | Deletes a user selected by the user's ID
+| HTTP   | Request          | Response                                  |
+| ------ | ---------------- | ----------------------------------------- |
+| GET    | /users/:username | Returns one user selected by the username |
+| POST   | /login           | Creates a new JWT session                 |
+| POST   | /register        | Registers a new user                      |
+| PUT    | /users/:id       | Edits a user selected by the user's ID    |
+| DELETE | /users/:id       | Deletes a user selected by the user's ID  |
 
 #### Notes:
 
-HTTP   | Request              | Response
---- | --- | ---
-GET    | /user/:user_id/notes | Returns all notes created by user's ID
-GET    | /notes/:id           | Returns one note selected by the note's ID
-POST   | /notes               | Creates a new note
-PUT    | /notes/:id           | Edits a note selected by the note's ID
-DELETE | /notes               | Deletes all notes created by user's ID
-DELETE | /notes/:id           | Deletes one note selected by the note's ID
+| HTTP   | Request              | Response                                   |
+| ------ | -------------------- | ------------------------------------------ |
+| GET    | /user/:user_id/notes | Returns all notes created by user's ID     |
+| GET    | /notes/:id           | Returns one note selected by the note's ID |
+| POST   | /notes               | Creates a new note                         |
+| PUT    | /notes/:id           | Edits a note selected by the note's ID     |
+| DELETE | /notes               | Deletes all notes created by user's ID     |
+| DELETE | /notes/:id           | Deletes one note selected by the note's ID |
 
 #### Tags:
 
-HTTP   | Request              | Response
---- | --- | ---
-GET    | /user/:user_id/tags | Returns all tags created by user's ID
-GET    | /tags/:id            | Returns one tag selected by the tag's ID
-POST   | /tags                | Creates a new tag
-PUT    | /tags/:id            | Edits a tag selected by the tag's ID
-DELETE | /tags                | Deletes all tags created by user's ID
-DELETE | /tags/:id            | Deletes one tag selected by the tag's ID
+| HTTP   | Request             | Response                                 |
+| ------ | ------------------- | ---------------------------------------- |
+| GET    | /user/:user_id/tags | Returns all tags created by user's ID    |
+| GET    | /tags/:id           | Returns one tag selected by the tag's ID |
+| POST   | /tags               | Creates a new tag                        |
+| PUT    | /tags/:id           | Edits a tag selected by the tag's ID     |
+| DELETE | /tags               | Deletes all tags created by user's ID    |
+| DELETE | /tags/:id           | Deletes one tag selected by the tag's ID |
 
 ## Contributing
 
 [@kylbutlr](https://github.com/kylbutlr)
 
 PRs accepted.
+
+## Special Thanks
+
+[@NoumanSaleem](https://github.com/NoumanSaleem])
 
 ## License
 
