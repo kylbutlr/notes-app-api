@@ -238,8 +238,8 @@ module.exports = client => {
   app.put('/tags/:id', [authMiddleware(db), putTag]);
   app.delete('/tags/:id', [authMiddleware(db), deleteOneTag]);
   app.delete('/tags', [authMiddleware(db), deleteAllTags]);
-  app.get('/user/:user_id/notes', [authMiddleware(db), getAllNotesByUserID]);
-  app.get('/user/:user_id/tags', [authMiddleware(db), getAllTagsByUserID]);
+  app.get('/notes/user/:user_id', [authMiddleware(db), getAllNotesByUserID]);
+  app.get('/tags/user/:user_id', [authMiddleware(db), getAllTagsByUserID]);
   app.get('/users/:username', [authMiddleware(db), getOneUserByUsername]);
   app.put('/users/:id', [authMiddleware(db), putOneUser]);
   app.delete('/users/:id', [authMiddleware(db), deleteOneUser]);
