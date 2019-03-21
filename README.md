@@ -38,11 +38,10 @@ headers: {
 
 #### Users:
 
-| HTTP   | Request          | Response                                  |
-| ------ | ---------------- | ----------------------------------------- |
-| GET    | /user/:username | Returns one user selected by the username |
-| POST   | /login           | Creates a new JWT session                 |
-| POST   | /register        | Registers a new user                      |
+| HTTP | Request   | Response                                                    |
+| ---- | --------- | ----------------------------------------------------------- |
+| POST | /login    | Checks returned hashed password and creates new JWT session |
+| POST | /register | Registers a new user after hashing the password             |
 
 #### Notes:
 
@@ -52,7 +51,7 @@ headers: {
 | GET    | /notes/:id           | Returns one note selected by the note's ID |
 | POST   | /notes               | Creates a new note                         |
 | PUT    | /notes/:id           | Edits a note selected by the note's ID     |
-| DELETE | /notes               | Deletes all notes created by user's ID     |
+| DELETE | /notes/user/:user_id | Deletes all notes created by user's ID     |
 | DELETE | /notes/:id           | Deletes one note selected by the note's ID |
 
 #### Tags:
@@ -63,7 +62,7 @@ headers: {
 | GET    | /tags/:id           | Returns one tag selected by the tag's ID |
 | POST   | /tags               | Creates a new tag                        |
 | PUT    | /tags/:id           | Edits a tag selected by the tag's ID     |
-| DELETE | /tags               | Deletes all tags created by user's ID    |
+| DELETE | /tags/user/user:id  | Deletes all tags created by user's ID    |
 | DELETE | /tags/:id           | Deletes one tag selected by the tag's ID |
 
 ## Contributing
