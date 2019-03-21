@@ -40,17 +40,15 @@ headers: {
 
 | HTTP   | Request          | Response                                  |
 | ------ | ---------------- | ----------------------------------------- |
-| GET    | /users/:username | Returns one user selected by the username |
+| GET    | /user/:username | Returns one user selected by the username |
 | POST   | /login           | Creates a new JWT session                 |
 | POST   | /register        | Registers a new user                      |
-| PUT    | /users/:id       | Edits a user selected by the user's ID    |
-| DELETE | /users/:id       | Deletes a user selected by the user's ID  |
 
 #### Notes:
 
 | HTTP   | Request              | Response                                   |
 | ------ | -------------------- | ------------------------------------------ |
-| GET    | /user/:user_id/notes | Returns all notes created by user's ID     |
+| GET    | /notes/user/:user_id | Returns all notes created by user's ID     |
 | GET    | /notes/:id           | Returns one note selected by the note's ID |
 | POST   | /notes               | Creates a new note                         |
 | PUT    | /notes/:id           | Edits a note selected by the note's ID     |
@@ -61,7 +59,7 @@ headers: {
 
 | HTTP   | Request             | Response                                 |
 | ------ | ------------------- | ---------------------------------------- |
-| GET    | /user/:user_id/tags | Returns all tags created by user's ID    |
+| GET    | /tags/user/:user_id | Returns all tags created by user's ID    |
 | GET    | /tags/:id           | Returns one tag selected by the tag's ID |
 | POST   | /tags               | Creates a new tag                        |
 | PUT    | /tags/:id           | Edits a tag selected by the tag's ID     |

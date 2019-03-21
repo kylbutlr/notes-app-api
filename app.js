@@ -240,9 +240,7 @@ module.exports = client => {
   app.delete('/tags', [authMiddleware(db), deleteAllTags]);
   app.get('/notes/user/:user_id', [authMiddleware(db), getAllNotesByUserID]);
   app.get('/tags/user/:user_id', [authMiddleware(db), getAllTagsByUserID]);
-  app.get('/users/:username', [authMiddleware(db), getOneUserByUsername]);
-  app.put('/users/:id', [authMiddleware(db), putOneUser]);
-  app.delete('/users/:id', [authMiddleware(db), deleteOneUser]);
+  app.get('/user/:username', [authMiddleware(db), getOneUserByUsername]);
   app.post('/register', registerUser);
   app.post('/login', loginUser);
   app.use((req, res) => res.status(404).send('404: Not Found'));
