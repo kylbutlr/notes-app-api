@@ -57,7 +57,8 @@ module.exports = client => {
     });
   };
   const deleteAllNotes = (req, res, next) => {
-    db.deleteAllNotes((err, data) => {
+    const user_id = Number(req.params.user_id);
+    db.deleteAllNotes(user_id, (err, data) => {
       if (err) return next(err);
       res.status(204).send(data);
     });
@@ -209,7 +210,7 @@ module.exports = client => {
     });
     req.on('end', () => {
       const { username, password } = JSON.parse(body);
-      db.selectOneUserByUsername(username, (err, data) => {
+      db.loginUser(username, (err, data) => {
         if (err) return next(err);
         if (!data[0]) return next();
         const user_id = data[0].id;
@@ -232,15 +233,14 @@ module.exports = client => {
   app.post('/notes', [authMiddleware(db), postNote]);
   app.put('/notes/:id', [authMiddleware(db), putNote]);
   app.delete('/notes/:id', [authMiddleware(db), deleteOneNote]);
-  app.delete('/notes', [authMiddleware(db), deleteAllNotes]);
+  app.delete('/notes/user/:user_id', [authMiddleware(db), deleteAllNotes]);
   app.get('/tags/:id', [authMiddleware(db), getOneTag]);
   app.post('/tags', [authMiddleware(db), postTag]);
   app.put('/tags/:id', [authMiddleware(db), putTag]);
   app.delete('/tags/:id', [authMiddleware(db), deleteOneTag]);
-  app.delete('/tags', [authMiddleware(db), deleteAllTags]);
+  app.delete('/tags/user/:user_id', [authMiddleware(db), deleteAllTags]);
   app.get('/notes/user/:user_id', [authMiddleware(db), getAllNotesByUserID]);
   app.get('/tags/user/:user_id', [authMiddleware(db), getAllTagsByUserID]);
-  app.get('/user/:username', [authMiddleware(db), getOneUserByUsername]);
   app.post('/register', registerUser);
   app.post('/login', loginUser);
   app.use((req, res) => res.status(404).send('404: Not Found'));

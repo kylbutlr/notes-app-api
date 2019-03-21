@@ -33,8 +33,8 @@ module.exports = client => ({
         cb(null, res.rows);
       }
     ),
-  deleteAllNotes: cb =>
-    client.query('DELETE FROM notes RETURNING *', (err, res) => {
+  deleteAllNotes: (user_id, cb) =>
+    client.query('DELETE FROM notes WHERE user_id = $1 RETURNING *', [user_id], (err, res) => {
       if (err) return cb(err);
       cb(null, res.rows);
     }),
@@ -88,39 +88,8 @@ module.exports = client => ({
       if (err) return cb(err);
       cb(null, res.rows);
     }),
-
-  // Users
-  selectAllUsers: cb =>
-    client.query('SELECT * FROM users', (err, res) => {
-      if (err) return cb(err);
-      cb(null, res.rows);
-    }),
-  selectOneUserByID: (id, cb) =>
-    client.query('SELECT * FROM users WHERE id = $1', [id], (err, res) => {
-      if (err) return cb(err);
-      cb(null, res.rows);
-    }),
-  selectOneUserByUsername: (username, cb) =>
+  loginUser: (username, cb) =>
     client.query('SELECT * FROM users WHERE username = $1', [username], (err, res) => {
-      if (err) return cb(err);
-      cb(null, res.rows);
-    }),
-  updateUser: (id, username, password, cb) =>
-    client.query(
-      'UPDATE users SET username = $2, password = $3 WHERE id = $1 RETURNING *',
-      [id, username, password],
-      (err, res) => {
-        if (err) return cb(err);
-        cb(null, res.rows);
-      }
-    ),
-  deleteAllUsers: cb =>
-    client.query('DELETE FROM users RETURNING *', (err, res) => {
-      if (err) return cb(err);
-      cb(null, res.rows);
-    }),
-  deleteOneUser: (id, cb) =>
-    client.query('DELETE FROM users WHERE id = $1 RETURNING *', [id], (err, res) => {
       if (err) return cb(err);
       cb(null, res.rows);
     }),
