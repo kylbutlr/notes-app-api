@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 const DB = require('./db');
 const UserModel = require('./model/user');
 const SessionModel = require('./model/session');
@@ -28,32 +29,20 @@ module.exports = client => {
     });
   };
   const postNote = (req, res, next) => {
-    let body = '';
-    req.on('data', chunk => {
-      body += chunk.toString();
-    });
-    req.on('end', () => {
-      const { title, text, tags, user_id } = JSON.parse(body);
+      const { title, text, tags, user_id } = req.body;
       db.insertNote(title, text, tags, user_id, (err, data) => {
         if (err) return next(err);
         res.status(201).send(data[0]);
       });
-    });
   };
   const putNote = (req, res, next) => {
-    let body = '';
-    req.on('data', chunk => {
-      body += chunk.toString();
-    });
-    req.on('end', () => {
       const id = Number(req.params.id);
-      const { title, text, tags, user_id } = JSON.parse(body);
+      const { title, text, tags, user_id } = req.body;
       db.updateNote(id, title, text, tags, user_id, (err, data) => {
         if (err) return next(err);
         if (!data[0]) return next();
         res.status(204).send(data[0]);
       });
-    });
   };
   const deleteAllNotes = (req, res, next) => {
     const user_id = Number(req.params.user_id);
@@ -90,12 +79,7 @@ module.exports = client => {
     });
   };
   const postTag = (req, res, next) => {
-    let body = '';
-    req.on('data', chunk => {
-      body += chunk.toString();
-    });
-    req.on('end', () => {
-      const { title, user_id } = JSON.parse(body);
+      const { title, user_id } = req.body;
       db.insertTag(title, user_id, (err, data) => {
         if (err) {
           if (err.code === '23505') {
@@ -105,16 +89,10 @@ module.exports = client => {
         }
         res.status(201).send(data[0]);
       });
-    });
   };
   const putTag = (req, res, next) => {
-    let body = '';
-    req.on('data', chunk => {
-      body += chunk.toString();
-    });
-    req.on('end', () => {
       const id = Number(req.params.id);
-      const { title, user_id } = JSON.parse(body);
+      const { title, user_id } = req.body;
       db.updateTag(id, title, user_id, (err, data) => {
         if (err) {
           if (err.code === '23505') {
@@ -125,7 +103,6 @@ module.exports = client => {
         if (!data[0]) return next();
         res.status(204).send(data[0]);
       });
-    });
   };
   const deleteAllTags = (req, res, next) => {
     const user_id = Number(req.params.user_id);
@@ -143,12 +120,7 @@ module.exports = client => {
     });
   };
   const registerUser = (req, res, next) => {
-    let body = '';
-    req.on('data', chunk => {
-      body += chunk.toString();
-    });
-    req.on('end', () => {
-      const { username, password } = JSON.parse(body);
+      const { username, password } = req.body;
       userModel.hashPass(password, hashedPass => {
         db.registerUser(username, hashedPass, (err, data) => {
           if (err) {
@@ -160,15 +132,9 @@ module.exports = client => {
           res.status(201).send(data[0]);
         });
       });
-    });
   };
   const loginUser = (req, res, next) => {
-    let body = '';
-    req.on('data', chunk => {
-      body += chunk.toString();
-    });
-    req.on('end', () => {
-      const { username, password } = JSON.parse(body);
+      const { username, password } = req.body;
       db.loginUser(username, (err, data) => {
         if (err) return next(err);
         if (!data[0]) return next();
@@ -184,10 +150,10 @@ module.exports = client => {
           }
         });
       });
-    });
   };
 
   app.use(cors());
+  app.user(bodyParser());
   app.get('/notes/:id', [authMiddleware(db), getOneNote]);
   app.post('/notes', [authMiddleware(db), postNote]);
   app.put('/notes/:id', [authMiddleware(db), putNote]);
