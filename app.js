@@ -153,7 +153,7 @@ module.exports = client => {
   };
 
   app.use(cors());
-  app.user(bodyParser());
+  app.use(bodyParser.json());
   app.get('/notes/:id', [authMiddleware(db), getOneNote]);
   app.post('/notes', [authMiddleware(db), postNote]);
   app.put('/notes/:id', [authMiddleware(db), putNote]);
