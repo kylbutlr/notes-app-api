@@ -1,5 +1,4 @@
 module.exports = client => ({
-  // Notes
   selectAllNotes: cb =>
     client.query('SELECT * FROM notes', (err, res) => {
       if (err) return cb(err);
@@ -43,8 +42,6 @@ module.exports = client => ({
       if (err) return cb(err);
       cb(null, res.rows);
     }),
-
-  // Tags
   selectAllTags: cb =>
     client.query('SELECT * FROM tags', (err, res) => {
       if (err) return cb(err);
@@ -78,8 +75,8 @@ module.exports = client => ({
         cb(null, res.rows);
       }
     ),
-  deleteAllTags: cb =>
-    client.query('DELETE FROM tags RETURNING *', (err, res) => {
+  deleteAllTags: (user_id, cb) =>
+    client.query('DELETE FROM tags WHERE user_id = $1 RETURNING *', [user_id], (err, res) => {
       if (err) return cb(err);
       cb(null, res.rows);
     }),

@@ -11,7 +11,6 @@ module.exports = client => {
   const userModel = UserModel(db);
   const sessionModel = SessionModel(db);
 
-  // Notes
   const getAllNotesByUserID = (req, res, next) => {
     const user_id = req.params.user_id;
     db.selectAllNotesByUserID(user_id, (err, data) => {
@@ -71,8 +70,6 @@ module.exports = client => {
       res.status(204).send(data[0]);
     });
   };
-
-  // Tags
   const getAllTagsByUserID = (req, res, next) => {
     const user_id = req.user.user_id;
     db.selectAllTagsByUserID(user_id, (err, data) => {
@@ -131,7 +128,8 @@ module.exports = client => {
     });
   };
   const deleteAllTags = (req, res, next) => {
-    db.deleteAllTags((err, data) => {
+    const user_id = Number(req.params.user_id);
+    db.deleteAllTags(user_id, (err, data) => {
       if (err) return next(err);
       res.status(204).send(data);
     });
@@ -144,45 +142,6 @@ module.exports = client => {
       res.status(204).send(data[0]);
     });
   };
-
-  // Users
-  const getOneUserByUsername = (req, res, next) => {
-    const username = req.params.username;
-    db.selectOneUserByUsername(username, (err, data) => {
-      if (err) return next(err);
-      if (!data[0]) return next();
-      res.status(200).send(data[0]);
-    });
-  };
-  const putOneUser = (req, res, next) => {
-    let body = '';
-    req.on('data', chunk => {
-      body += chunk.toString();
-    });
-    req.on('end', () => {
-      const id = Number(req.params.id);
-      const { username, password } = JSON.parse(body);
-      db.updateUser(id, username, password, (err, data) => {
-        if (err) {
-          if (err.code === '23505') {
-            res.status(422);
-          }
-          return next(err);
-        }
-        if (!data[0]) return next();
-        res.status(204).send(data[0]);
-      });
-    });
-  };
-  const deleteOneUser = (req, res, next) => {
-    const id = Number(req.params.id);
-    db.deleteOneUser(id, (err, data) => {
-      if (err) return next(err);
-      if (!data[0]) return next();
-      res.status(204).send(data[0]);
-    });
-  };
-
   const registerUser = (req, res, next) => {
     let body = '';
     req.on('data', chunk => {
