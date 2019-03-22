@@ -14,7 +14,7 @@ Uses: PostgreSQL, Express, Jest, JWT, and Bcrypt
 
 Or [go to the API directly](https://kylbutlr-notes-api.herokuapp.com) in your browser. (Requests require JWT authentication created by login; See the Usage section below for more details)
 
-No e-mail required to register a new user account. Or use the public test account (username: test, password: test).
+No e-mail required to register a new user. Or use the public test account (username: test, password: test).
 
 ***
 
