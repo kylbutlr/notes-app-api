@@ -8,11 +8,15 @@ Features: REST CRUD, routing, tests, user accounts, authorization, and encryptio
 
 Uses: PostgreSQL, Express, Jest, JWT, and Bcrypt
 
+***
+
 ### [Click here for a live preview](https://kylbutlr-notes-react.herokuapp.com/) of my React app that uses this API. 
 
 Or [go to the API directly](https://kylbutlr-notes-api.herokuapp.com) in your browser. (Requests require JWT authentication created by login; See the Usage section below for more details)
 
 No e-mail required to register a new user account. Feel free to "sign up" and test things out!
+
+***
 
 ## Install
 
@@ -78,6 +82,8 @@ Start unit and integration tests:
 ```shell
 npm test
 ```
+
+***
 
 ## Contributing
 
