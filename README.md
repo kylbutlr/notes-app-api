@@ -22,7 +22,7 @@ npm install
 
 ## Usage
 
-Server runs on port `3000`
+Start the local server:
 
 ```shell
 npm start
@@ -70,6 +70,14 @@ axios.post(`${API_ENDPOINT}/notes`, note_data, config)
 | PUT    | /tags/:id           | Edits a tag selected by the tag's ID     |
 | DELETE | /tags/user/user:id  | Deletes all tags created by user's ID    |
 | DELETE | /tags/:id           | Deletes one tag selected by the tag's ID |
+
+#### Tests:
+
+Start unit and integration tests:
+
+```shell
+npm test
+```
 
 ## Contributing
 
