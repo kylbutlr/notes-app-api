@@ -36,6 +36,12 @@ headers: {
 }
 ```
 
+For an example with axios, a request would look like:
+
+```js
+axios.post(`${API_ENDPOINT}/notes`, note_data, config)
+```
+
 #### Users:
 
 | HTTP | Request   | Response                                                    |
