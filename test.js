@@ -3,10 +3,10 @@ const { Client } = require('pg');
 const App = require('./app');
 const DB = require('./db');
 const UserModel = require('./model/user');
+const SessionModel = require('./model/session');
 let db;
 let client;
-
-const userModel = UserModel(db);
+let session = [];
 
 const newUser1 = {
   username: 'testUser3',
@@ -21,6 +21,10 @@ const tag1 = {
   user_id: 1,
 };
 const tag2 = {
+  title: 'testTag3',
+  user_id: 1,
+};
+const tag3 = {
   title: 'updatedTag',
   user_id: 1,
 };
@@ -46,6 +50,8 @@ beforeAll(() => {
   client.connect();
   db = DB(client);
   app = App(client);
+  userModel = UserModel(db);
+  sessionModel = SessionModel(db);
 });
 afterAll(() => {
   client.end();
@@ -92,8 +98,15 @@ describe('USERS', () => {
         expect(res);
         userModel.checkPass(newUser1.password, res[0].password, passMatch => {
           expect(passMatch).toBe(true);
+          sessionModel.signSession(res[0].id, newUser1.username, newSession => {
+            session = {
+              jwt: newSession.jwt,
+              user_id: res[0].id,
+              username: newUser1.username,
+            };
+            done();
+          });
         });
-        done();
       });
     });
     it('should return unauthorized for wrong password', done => {
@@ -102,8 +115,8 @@ describe('USERS', () => {
         expect(res);
         userModel.checkPass('wrongPass', res[0].password, passMatch => {
           expect(passMatch).toBe(false);
+          done();
         });
-        done();
       });
     });
   });
@@ -111,29 +124,29 @@ describe('USERS', () => {
 
 describe('TAGS', () => {
   describe('POST to /tags', () => {
-    /* THIS NEEDS TO BE AUTHORIZED TO PASS */
-    /*it('should post to /tags', done => {
+    it('should post to /tags', done => {
       request(app)
         .post('/tags')
+        .set('authorization', session.jwt)
         .send(tag1)
         .expect(201, done);
-    });*/
+    });
     it('should call db.insertTag', done => {
-      db.insertTag(tag1.title, tag1.user_id, (err, res) => {
-        if (err) throw(err);
-        expect(res[0].id).toBe(2);
-        expect(res[0].title).toBe(tag1.title);
-        expect(res[0].user_id).toBe(tag1.user_id);
+      db.insertTag(tag2.title, tag2.user_id, (err, res) => {
+        if (err) throw err;
+        expect(res[0].id).toBe(3);
+        expect(res[0].title).toBe(tag2.title);
+        expect(res[0].user_id).toBe(tag2.user_id);
         done();
       });
     });
-    /* THIS NEEDS TO BE AUTHORIZED TO PASS */
-    /*it('should fail for repeated tags', done => {
+    it('should fail for repeated tags', done => {
       request(app)
         .post('/tags')
+        .set('authorization', session.jwt)
         .send(tag1)
         .expect(422, done);
-    });*/
+    });
     it('should fail for repeated tags', done => {
       db.insertTag(tag1.title, tag1.user_id, (err, res) => {
         expect(err.code === 23505);
@@ -142,12 +155,12 @@ describe('TAGS', () => {
     });
   });
   describe('GET one from /tags', () => {
-    /* THIS NEEDS TO BE AUTHORIZED TO PASS */
-    /*it('should return second tag', done => {
+    it('should return second tag', done => {
       request(app)
         .get('/tags/2')
+        .set('authorization', session.jwt)
         .expect(200, done);
-    });*/
+    });
     it('should call db.selectOneTag', done => {
       db.selectOneTag(2, (err, res) => {
         if (err) throw err;
@@ -157,88 +170,88 @@ describe('TAGS', () => {
         done();
       });
     });
-    /* THIS NEEDS TO BE AUTHORIZED TO PASS */
-    /*it('should fail when invalid tag', done => {
+    it('should fail when invalid tag', done => {
       request(app)
         .get('/tags/-1')
+        .set('authorization', session.jwt)
         .expect(404, done);
-    });*/
+    });
   });
   describe('GET all from /tags', () => {
-    /* THIS NEEDS TO BE AUTHORIZED TO PASS */
-    /*it('should return all tags (2)', done => {
+    it('should return all tags (2)', done => {
       request(app)
-        .get('/tags')
-        .expect(200);
-    });*/
+        .get(`/tags/user/${session.user_id}`)
+        .set('authorization', session.jwt)
+        .expect(200, done);
+    });
     it('should call db.selectAllTags', done => {
       db.selectAllTags((err, res) => {
         if (err) throw err;
-        expect(res).toHaveLength(2);
+        expect(res).toHaveLength(3);
         done();
       });
     });
   });
   describe('PUT to /tags', () => {
-    /* THIS NEEDS TO BE AUTHORIZED TO PASS */
-    /*it('should update first tag', done => {
+    it('should update first tag', done => {
       request(app)
         .put('/tags/1')
-        .send(tag2)
-        .expect(204);
-      });*/
+        .set('authorization', session.jwt)
+        .send(tag3)
+        .expect(204, done);
+      });
     it('should call db.updateTag', done => {
-      db.updateTag(tag2.user_id, tag2.title, tag2.user_id, (err, res) => {
+      db.updateTag(1, tag3.title, tag3.user_id, (err, res) => {
         if (err) throw err;
         expect(res[0].id).toBe(1);
-        expect(res[0].title).toBe(tag2.title);
-        expect(res[0].user_id).toBe(tag2.user_id);
+        expect(res[0].title).toBe(tag3.title);
+        expect(res[0].user_id).toBe(tag3.user_id);
         done();
       });
     });
-    /* THIS NEEDS TO BE AUTHORIZED TO PASS */
-    /*it('should fail when invalid tag', done => {
+    it('should fail when invalid tag', done => {
       request(app)
         .put('/tags/-1')
+        .set('authorization', session.jwt)
         .send(tag2)
         .expect(404, done);
-    });*/
+    });
   });
-  /* THIS NEEDS TO BE AUTHORIZED TO PASS */
   describe('DELETE one from /tags', () => {
-    /*it('should delete second tag', done => {
+    it('should delete second tag', done => {
       request(app)
         .delete('/tags/2')
-        .expect(204);
-    });*/
+        .set('authorization', session.jwt)
+        .expect(204, done);
+    });
     it('should call db.deleteOneTag', done => {
       db.deleteOneTag(2, done);
     });
-    /* THIS NEEDS TO BE AUTHORIZED TO PASS */
-    /*it('should fail when invalid tag', done => {
+    it('should fail when invalid tag', done => {
       request(app)
         .delete('/tags/-1')
+        .set('authorization', session.jwt)
         .expect(404, done);
-    });*/
+    });
   });
   describe('DELETE all from /tags', () => {
-    /* THIS NEEDS TO BE AUTHORIZED TO PASS */
-    /*it('should delete all tags', done => {
+    it('should delete all tags', done => {
       request(app)
-        .delete('/tags')
-        .expect(204);
-    });*/
+        .delete(`/tags/user/${session.user_id}`)
+        .set('authorization', session.jwt)
+        .expect(204, done);
+    });
     it('should call db.deleteAllTags', done => {
       db.deleteAllTags(tag1.user_id, done);
     });
   });
   describe('GET all from /tags', () => {
-    /* THIS NEEDS TO BE AUTHORIZED TO PASS */
-    /*it('should return all tags (none)', done => {
+    it('should return all tags (none)', done => {
       request(app)
-        .get('/tags')
-        .expect(200);
-    });*/
+        .get(`/tags/user/${session.user_id}`)
+        .set('authorization', session.jwt)
+        .expect(200, done);
+    });
     it('should call db.selectAllTags', done => {
       db.selectAllTags((err, res) => {
         if (err) throw err;
@@ -315,13 +328,20 @@ describe('NOTES', () => {
         .expect(204);
     });*/
     it('should call db.updateNote', done => {
-      db.updateNote(note2.user_id, note2.title, note2.text, note2.tags, note2.user_id, (err, res) => {
-        if (err) throw err;
-        expect(res[0].id).toBe(1);
-        expect(res[0].title).toBe(note2.title);
-        expect(res[0].text).toBe(note2.text);
-        done();
-      });
+      db.updateNote(
+        note2.user_id,
+        note2.title,
+        note2.text,
+        note2.tags,
+        note2.user_id,
+        (err, res) => {
+          if (err) throw err;
+          expect(res[0].id).toBe(1);
+          expect(res[0].title).toBe(note2.title);
+          expect(res[0].text).toBe(note2.text);
+          done();
+        }
+      );
     });
     /* THIS NEEDS TO BE AUTHORIZED TO PASS */
     /*it('should fail when invalid note', done => {
@@ -338,7 +358,7 @@ describe('NOTES', () => {
         .delete('/notes/2')
         .expect(204);
     });*/
-    it ('should call db.deleteOneNote', done => {
+    it('should call db.deleteOneNote', done => {
       db.deleteOneNote(2, done);
     });
     /* THIS NEEDS TO BE AUTHORIZED TO PASS */
