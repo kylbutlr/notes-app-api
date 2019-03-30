@@ -6,7 +6,7 @@ const UserModel = require('./model/user');
 const SessionModel = require('./model/session');
 let db;
 let client;
-let session = [];
+let session;
 
 const newUser1 = {
   username: 'testUser3',
