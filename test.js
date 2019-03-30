@@ -35,9 +35,15 @@ const note1 = {
   user_id: 1,
 };
 const note2 = {
+  title: 'test title 3',
+  text: 'test note text',
+  tags: ['tag2'],
+  user_id: 1,
+};
+const note3 = {
   title: 'updated title',
   text: 'updated note text',
-  tags: ['tag1', 'tag2'],
+  tags: ['tag1'],
   user_id: 1,
 };
 
@@ -178,7 +184,7 @@ describe('TAGS', () => {
     });
   });
   describe('GET all from /tags', () => {
-    it('should return all tags (2)', done => {
+    it('should return all tags', done => {
       request(app)
         .get(`/tags/user/${session.user_id}`)
         .set('authorization', session.jwt)
@@ -246,7 +252,7 @@ describe('TAGS', () => {
     });
   });
   describe('GET all from /tags', () => {
-    it('should return all tags (none)', done => {
+    it('should return all tags', done => {
       request(app)
         .get(`/tags/user/${session.user_id}`)
         .set('authorization', session.jwt)
@@ -264,30 +270,31 @@ describe('TAGS', () => {
 
 describe('NOTES', () => {
   describe('POST to /notes', () => {
-    /* THIS NEEDS TO BE AUTHORIZED TO PASS */
-    /*it('should create notes', done => {
+    it('should create notes', done => {
       request(app)
         .post('/notes')
+        .set('authorization', session.jwt)
         .send(note1)
-        .expect(201);
-    });*/
+        .expect(201, done);
+    });
     it('should call db.insertNote', done => {
-      db.insertNote(note1.title, note1.text, note1.tags, note1.user_id, (err, res) => {
+      const { title, text, tags, user_id } = note2;
+      db.insertNote(title, text, tags, user_id, (err, res) => {
         if (err) throw err;
-        expect(res[0].id).toBe(2);
-        expect(res[0].title).toBe(note1.title);
-        expect(res[0].text).toBe(note1.text);
+        expect(res[0].id).toBe(3);
+        expect(res[0].title).toBe(note2.title);
+        expect(res[0].text).toBe(note2.text);
         done();
       });
     });
   });
   describe('GET one from /notes', () => {
-    /* THIS NEEDS TO BE AUTHORIZED TO PASS */
-    /*it('should return second note', done => {
+    it('should return second note', done => {
       request(app)
         .get('/notes/2')
-        .expect(200);
-    });*/
+        .set('authorization', session.jwt)
+        .expect(200, done);
+    });
     it('should call db.selectOneNote', done => {
       db.selectOneNote(2, (err, res) => {
         if (err) throw err;
@@ -297,44 +304,39 @@ describe('NOTES', () => {
         done();
       });
     });
-    /* THIS NEEDS TO BE AUTHORIZED TO PASS */
-    /*it('should fail when invalid note', done => {
+    it('should fail when invalid note', done => {
       request(app)
         .get('/notes/-1')
+        .set('authorization', session.jwt)
         .expect(404, done);
-    });*/
+    });
   });
   describe('GET all from /notes', () => {
-    /* THIS NEEDS TO BE AUTHORIZED TO PASS */
-    /*it('should return all notes (2)', done => {
+    it('should return all notes', done => {
       request(app)
-        .get('/notes')
-        .expect(200);
-    });*/
+        .get(`/notes/user/${session.user_id}`)
+        .set('authorization', session.jwt)
+        .expect(200, done);
+    });
     it('should call db.selectAllNotes', done => {
       db.selectAllNotes((err, res) => {
         if (err) throw err;
-        expect(res).toHaveLength(2);
+        expect(res).toHaveLength(3);
         done();
       });
     });
   });
   describe('PUT to /notes', () => {
-    /* THIS NEEDS TO BE AUTHORIZED TO PASS */
-    /*it('should update first note', done => {
+    it('should update first note', done => {
       request(app)
         .put('/notes/1')
+        .set('authorization', session.jwt)
         .send(note2)
-        .expect(204);
-    });*/
+        .expect(204, done);
+    });
     it('should call db.updateNote', done => {
-      db.updateNote(
-        note2.user_id,
-        note2.title,
-        note2.text,
-        note2.tags,
-        note2.user_id,
-        (err, res) => {
+      const { title, text, tags, user_id } = note2;
+      db.updateNote(1, title, text, tags, user_id, (err, res) => {
           if (err) throw err;
           expect(res[0].id).toBe(1);
           expect(res[0].title).toBe(note2.title);
@@ -343,49 +345,49 @@ describe('NOTES', () => {
         }
       );
     });
-    /* THIS NEEDS TO BE AUTHORIZED TO PASS */
-    /*it('should fail when invalid note', done => {
+    it('should fail when invalid note', done => {
       request(app)
         .put('/notes/-1')
+        .set('authorization', session.jwt)
         .send(note2)
         .expect(404, done);
-    });*/
+    });
   });
   describe('DELETE one from /notes', () => {
-    /* THIS NEEDS TO BE AUTHORIZED TO PASS */
-    /*it('should delete second note', done => {
+    it('should delete second note', done => {
       request(app)
         .delete('/notes/2')
-        .expect(204);
-    });*/
+        .set('authorization', session.jwt)
+        .expect(204, done);
+    });
     it('should call db.deleteOneNote', done => {
       db.deleteOneNote(2, done);
     });
-    /* THIS NEEDS TO BE AUTHORIZED TO PASS */
-    /*it('should fail when invalid note', done => {
+    it('should fail when invalid note', done => {
       request(app)
         .delete('/notes/-1')
+        .set('authorization', session.jwt)
         .expect(404, done);
-    });*/
+    });
   });
   describe('DELETE all from /notes', () => {
-    /* THIS NEEDS TO BE AUTHORIZED TO PASS */
-    /*it('should delete all notes', done => {
+    it('should delete all notes', done => {
       request(app)
-        .delete('/notes')
-        .expect(204);
-    });*/
+        .delete(`/notes/user/${session.user_id}`)
+        .set('authorization', session.jwt)
+        .expect(204, done);
+    });
     it('should call db.deleteAllNotes', done => {
       db.deleteAllNotes(note1.user_id, done);
     });
   });
   describe('GET all from /notes', () => {
-    /* THIS NEEDS TO BE AUTHORIZED TO PASS */
-    /*it('should return all notes (none)', done => {
+    it('should return all notes', done => {
       request(app)
-        .get('/notes')
-        .expect(200);
-    });*/
+        .get(`/notes/user/${session.user_id}`)
+        .set('authorization', session.jwt)
+        .expect(200, done);
+    });
     it('should call db.selectAllNotes', done => {
       db.selectAllNotes((err, res) => {
         if (err) throw err;
