@@ -8,45 +8,6 @@ let db;
 let client;
 let session;
 
-const newUser1 = {
-  username: 'testUser3',
-  password: 'pass',
-};
-const newUser2 = {
-  username: 'testUser4',
-  password: 'pass',
-};
-const tag1 = {
-  title: 'testTag2',
-  user_id: 1,
-};
-const tag2 = {
-  title: 'testTag3',
-  user_id: 1,
-};
-const tag3 = {
-  title: 'updatedTag',
-  user_id: 1,
-};
-const note1 = {
-  title: 'test title 2',
-  text: 'test note text',
-  tags: ['tag1', 'tag2'],
-  user_id: 1,
-};
-const note2 = {
-  title: 'test title 3',
-  text: 'test note text',
-  tags: ['tag2'],
-  user_id: 1,
-};
-const note3 = {
-  title: 'updated title',
-  text: 'updated note text',
-  tags: ['tag1'],
-  user_id: 1,
-};
-
 beforeAll(() => {
   client = new Client({
     user: 'postgres',
@@ -59,11 +20,20 @@ beforeAll(() => {
   userModel = UserModel(db);
   sessionModel = SessionModel(db);
 });
+
 afterAll(() => {
   client.end();
 });
 
 describe('USERS', () => {
+  const newUser1 = {
+    username: 'testUser3',
+    password: 'pass',
+  };
+  const newUser2 = {
+    username: 'testUser4',
+    password: 'pass',
+  };
   describe('POST /register', () => {
     it('should post to /register', done => {
       request(app)
@@ -129,6 +99,18 @@ describe('USERS', () => {
 });
 
 describe('TAGS', () => {
+  const tag1 = {
+    title: 'testTag2',
+    user_id: 1,
+  };
+  const tag2 = {
+    title: 'testTag3',
+    user_id: 1,
+  };
+  const tag3 = {
+    title: 'updatedTag',
+    user_id: 1,
+  };
   describe('POST to /tags', () => {
     it('should post to /tags', done => {
       request(app)
@@ -269,6 +251,24 @@ describe('TAGS', () => {
 });
 
 describe('NOTES', () => {
+  const note1 = {
+    title: 'test title 2',
+    text: 'test note text',
+    tags: ['tag1', 'tag2'],
+    user_id: 1,
+  };
+  const note2 = {
+    title: 'test title 3',
+    text: 'test note text',
+    tags: ['tag2'],
+    user_id: 1,
+  };
+  const note3 = {
+    title: 'updated title',
+    text: 'updated note text',
+    tags: ['tag1'],
+    user_id: 1,
+  };
   describe('POST to /notes', () => {
     it('should create notes', done => {
       request(app)
