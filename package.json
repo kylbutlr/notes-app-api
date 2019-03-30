@@ -4,7 +4,7 @@
   "description": "note taking application",
   "main": "app.js",
   "scripts": {
-    "test": "psql -U postgres -d notes_test -f restartTest.sql && npx jest test.js",
+    "test": "psql -h ec2-23-23-173-30.compute-1.amazonaws.com -U crirxgtwwpqodo -d d8p4hiho5af5b0 -p 5432 -f restartTest.sql && npx jest test.js",
     "start": "node server.js"
   },
   "repository": {

@@ -10,9 +10,12 @@ let session;
 
 beforeAll(() => {
   client = new Client({
-    user: 'postgres',
-    password: 'pass',
-    database: 'notes_test',
+    user: 'crirxgtwwpqodo',
+    password: '478bf4a5ff83394515873c8c5ad0bffa3b2aed966c0e29aafadec87d54a4f7ea',
+    database: 'd8p4hiho5af5b0',
+    port: 5432,
+    host: 'ec2-23-23-173-30.compute-1.amazonaws.com',
+    ssl: true,
   });
   client.connect();
   db = DB(client);
