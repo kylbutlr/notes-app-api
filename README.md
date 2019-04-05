@@ -1,6 +1,6 @@
 # Notes App (API)
 
-Note-taking application RESTful API server
+Note-taking application RESTful API node server
 
 Created to be used with my [Notes App (React)](https://github.com/kylbutlr/notes-app-react) app front-end
 
