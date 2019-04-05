@@ -1,49 +1,32 @@
-# Notes App (API)
+# Notes App API
 
-Note-taking application RESTful API node server
+#### Note-taking application RESTful API
 
-Created to be used with my [Notes App (React)](https://github.com/kylbutlr/notes-app-react) app front-end
+Created to be used with my [Notes App (React)](https://github.com/kylbutlr/notes-app-react) front-end
 
 Features: REST CRUD, routing, tests, user accounts, authorization, and encryption
 
 Uses: PostgreSQL, Express, Jest, JWT, and Bcrypt
 
-***
-
-### [Click here for a live preview](https://kylbutlr-notes-react.herokuapp.com/) of my React app that uses this API. 
-
-Or [go to the API directly](https://kylbutlr-notes-api.herokuapp.com) in your browser. (Requests require JWT authentication created by login; See the Usage section below for more details)
-
-No e-mail required to register a new user, or feel free to use the public test account (username: test, password: test).
-
-***
-
-## Install
-
-```shell
-npm install
-```
-
 ## Usage
 
-Start the local server:
+The API can be found at: ```https://kylbutlr-notes-api.herokuapp.com```
 
-```shell
-npm start
-```
+Alternatively, download this repository and run the server locally:
 
-All requests (besides login/register) require a Config Object of Headers for Authorization containing the JSON Web Token:
+1. Install the dependencies: ```npm install```
+2. Run unit and integration tests: ```npm test```
+3. Start the server: ```npm start``` 
+4. API can be found at: ```localhost:3000```
+
+### Requests:
+
+Create, update, and delete post requests require a Config Object of Headers for Authorization containing the JSON Web Token for the current session (tied to the logged in user):
 
 ```js
 headers: {
   authorization: JWT
 }
-```
-
-For an example with axios, a request would look like:
-
-```js
-axios.post(`${API_ENDPOINT}/notes`, note_data, config)
 ```
 
 #### Users:
@@ -74,14 +57,6 @@ axios.post(`${API_ENDPOINT}/notes`, note_data, config)
 | PUT    | /tags/:id           | Edits a tag selected by the tag's ID     |
 | DELETE | /tags/user/user:id  | Deletes all tags created by user's ID    |
 | DELETE | /tags/:id           | Deletes one tag selected by the tag's ID |
-
-#### Tests:
-
-Start unit and integration tests:
-
-```shell
-npm test
-```
 
 ***
 
