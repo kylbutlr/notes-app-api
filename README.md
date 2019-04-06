@@ -8,7 +8,7 @@ Features: REST CRUD, routing, tests, user accounts, authorization, and encryptio
 
 Uses: PostgreSQL, Express, Jest, JWT, and Bcrypt
 
-## Usage
+## How to Use
 
 The API can be found at: ```https://kylbutlr-notes-api.herokuapp.com```
 
