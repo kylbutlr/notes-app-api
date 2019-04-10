@@ -10,7 +10,7 @@ Uses: PostgreSQL, Express, Jest, JWT, and Bcrypt
 
 ## How to Use:
 
-The API can be found at: ```https://kylbutlr-notes-api.herokuapp.com```
+API Endpoint: ```https://kylbutlr-notes-api.herokuapp.com```
 
 Alternatively, download this repository and run the server locally:
 
