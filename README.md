@@ -2,7 +2,7 @@
 
 #### RESTful API for a basic note-taking application
 
-Created to be used with my [Notes App (React)](https://github.com/kylbutlr/notes-app-react) front-end
+Created to be used with [Notes App (React)](https://github.com/kylbutlr/notes-app-react)
 
 Features: REST CRUD, routing, tests, user accounts, authorization, and encryption
 
