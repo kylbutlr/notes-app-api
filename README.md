@@ -4,8 +4,6 @@
 
 Created to be used with [Notes App (React)](https://github.com/kylbutlr/notes-app-react)
 
-Features: REST CRUD, routing, tests, user accounts, authorization, and encryption
-
 Uses: PostgreSQL, Express, Jest, JWT, and Bcrypt
 
 ## How to Use:
