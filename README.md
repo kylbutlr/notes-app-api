@@ -1,8 +1,8 @@
-# Notes App API
+# Notepad App API
 
 #### RESTful API for a basic note-taking application
 
-Created to be used with [Notes App (React)](https://github.com/kylbutlr/notes-app-react)
+Created to be used with [Notepad App (React)](https://github.com/kylbutlr/notes-app-react)
 
 Uses: PostgreSQL, Express, Jest, JWT, and Bcrypt
 
