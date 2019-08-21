@@ -151,6 +151,9 @@ module.exports = client => {
         });
       });
   };
+  const getPing = (req, res, next) => {
+      res.status(200);
+  };
 
   app.use(cors());
   app.use(bodyParser.json());
@@ -168,6 +171,7 @@ module.exports = client => {
   app.get('/tags/user/:user_id', [authMiddleware(db), getAllTagsByUserID]);
   app.post('/register', registerUser);
   app.post('/login', loginUser);
+  app.get('/ping', getPing);
   app.use((req, res) => res.status(404).send('404: Not Found'));
   return app;
 };
