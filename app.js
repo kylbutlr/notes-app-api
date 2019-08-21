@@ -152,7 +152,8 @@ module.exports = client => {
       });
   };
   const getPing = (req, res, next) => {
-      res.status(200);
+      const data = '200';
+      res.status(200).send(data);
   };
 
   app.use(cors());
